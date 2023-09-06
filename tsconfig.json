@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "rootDir": "./src",
-    "outDir": "./out",
+    "noEmit": true,
     "target": "ESNext",
     "module": "ESNext",
     "declaration": true,
@@ -13,13 +13,17 @@
     "moduleResolution": "node",
     "lib": [
       "ESNext"
-    ]
+    ],
+    "paths": {
+      "acorn": ["./src/acorn.d.ts"],
+      "acorn-walk": ["./src/walk.d.ts"],
+      "acorn-loose": ["./src/loose.d.ts"]
+    }
   },
   "include": [
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "src/test/data"
+    "node_modules"
   ]
 }

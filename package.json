@@ -18,13 +18,15 @@
   },
   "homepage": "https://github.com/rwalle/acorn-types#readme",
   "dependencies": {
-    "@types/estree": "^1.0.1",
-    "@types/node": "^20.5.7",
     "acorn": "^8.10.0",
     "acorn-loose": "^8.3.0",
     "acorn-walk": "^8.2.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "eslint": "^8.48.0",
+    "eslint-config-standard": "^17.1.0",
     "typescript": "^5.2.2"
   }
 }
