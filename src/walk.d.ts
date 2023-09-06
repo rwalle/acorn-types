@@ -13,7 +13,7 @@ export type FullAncestorWalkerCallback<TState> = (
   type: string
 ) => void
 
-export type AggregateType = {
+type AggregateType = {
   Expression: acorn.Expression,
   Statement: acorn.Statement,
   Pattern: acorn.Pattern,
@@ -43,7 +43,7 @@ export type RecursiveVisitors<TState> = {
 
 export type FindPredicate = (type: string, node: acorn.Node) => boolean
 
-interface Found<TState> {
+export interface Found<TState> {
   node: acorn.Node,
   state: TState
 }
