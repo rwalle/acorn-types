@@ -48,29 +48,20 @@ export interface Program extends Node {
 export interface Function extends Node {
   id?: Identifier | null
   params: Array<Pattern>
-  body: FunctionBody
+  body: BlockStatement
   generator: boolean
   async: boolean
 }
 
 export interface ExpressionStatement extends Node {
   type: "ExpressionStatement"
-  expression: Expression
-}
-
-export interface Directive extends ExpressionStatement {
-  expression: Literal
-  directive: string
+  expression: Expression | Literal
+  directive?: string
 }
 
 export interface BlockStatement extends Node {
   type: "BlockStatement"
   body: Array<Statement>
-}
-
-export interface FunctionBody extends Node {
-  type: "BlockStatement"
-  body: Array<Directive | Statement>
 }
 
 export interface EmptyStatement extends Node {
@@ -316,7 +307,7 @@ export interface ArrowFunctionExpression extends Node {
   type: "ArrowFunctionExpression"
   id?: Identifier | null
   params: Array<Pattern>
-  body: FunctionBody | Expression
+  body: BlockStatement | Expression
   async: boolean
   expression: boolean
   generator: false
@@ -570,7 +561,7 @@ export type ModuleDeclaration =
 | ExportDefaultDeclaration
 | ExportAllDeclaration
 
-export type AnyNode = Statement | Expression | Declaration | ModuleDeclaration | Literal | Program | Directive | SwitchCase | CatchClause | Property | Super | SpreadElement | TemplateElement | AssignmentProperty | ObjectPattern | ArrayPattern | RestElement | AssignmentPattern | ClassBody | MethodDefinition | MetaProperty | ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier | ExportSpecifier | AnonymousFunctionDeclaration | AnonymousClassDeclaration | PropertyDefinition | PrivateIdentifier | StaticBlock
+export type AnyNode = Statement | Expression | Declaration | ModuleDeclaration | Literal | Program | SwitchCase | CatchClause | Property | Super | SpreadElement | TemplateElement | AssignmentProperty | ObjectPattern | ArrayPattern | RestElement | AssignmentPattern | ClassBody | MethodDefinition | MetaProperty | ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier | ExportSpecifier | AnonymousFunctionDeclaration | AnonymousClassDeclaration | PropertyDefinition | PrivateIdentifier | StaticBlock
 
 export function parse(input: string, options: Options): Program
 
