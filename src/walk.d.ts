@@ -33,12 +33,12 @@ export type AncestorVisitors<TState> = {
   [type in keyof AggregateType]?: (node: AggregateType[type], state: TState, ancestors: acorn.Node[]) => void
 }
 
-export type WalkerCallback<NodeType, TState> = (node: NodeType, state: TState) => void
+export type WalkerCallback<TState> = (node: acorn.Node, state: TState) => void
 
 export type RecursiveVisitors<TState> = {
-  [type in acorn.AnyNode["type"]]?: ( node: Extract<acorn.AnyNode, { type: type }>, state: TState, callback: WalkerCallback<Extract<acorn.AnyNode, { type: type }>, TState>) => void
+  [type in acorn.AnyNode["type"]]?: ( node: Extract<acorn.AnyNode, { type: type }>, state: TState, callback: WalkerCallback<TState>) => void
 } &  {
-  [type in keyof AggregateType]?: (node: AggregateType[type], state: TState, callback: WalkerCallback<AggregateType[type], TState>) => void
+  [type in keyof AggregateType]?: (node: AggregateType[type], state: TState, callback: WalkerCallback<TState>) => void
 }
 
 export type FindPredicate = (type: string, node: acorn.Node) => boolean
