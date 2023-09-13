@@ -518,6 +518,7 @@ export type Statement =
 | DoWhileStatement
 | ForStatement
 | ForInStatement
+| ForOfStatement
 | Declaration
 
 export type Declaration = 
