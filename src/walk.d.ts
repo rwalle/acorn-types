@@ -3,14 +3,14 @@ import * as acorn from "acorn"
 export type FullWalkerCallback<TState> = (
   node: acorn.Node,
   state: TState,
-  type: string
+  type: acorn.AnyNode["type"]
 ) => void
 
 export type FullAncestorWalkerCallback<TState> = (
   node: acorn.Node,
   state: TState,
   ancestors: acorn.Node[],
-  type: string
+  type: acorn.AnyNode["type"]
 ) => void
 
 type AggregateType = {
@@ -41,7 +41,7 @@ export type RecursiveVisitors<TState> = {
   [type in keyof AggregateType]?: (node: AggregateType[type], state: TState, callback: WalkerCallback<TState>) => void
 }
 
-export type FindPredicate = (type: string, node: acorn.Node) => boolean
+export type FindPredicate = (type: acorn.AnyNode["type"], node: acorn.Node) => boolean
 
 export interface Found<TState> {
   node: acorn.Node,
@@ -141,7 +141,7 @@ export function findNodeAt<TState>(
   node: acorn.Node,
   start: number | undefined,
   end?: number | undefined,
-  type?: FindPredicate | string,
+  type?: FindPredicate | acorn.AnyNode["type"],
   base?: RecursiveVisitors<TState>,
   state?: TState
 ): Found<TState> | undefined
@@ -157,7 +157,7 @@ export function findNodeAt<TState>(
 export function findNodeAround<TState>(
   node: acorn.Node,
   start: number | undefined,
-  type?: FindPredicate | string,
+  type?: FindPredicate | acorn.AnyNode["type"],
   base?: RecursiveVisitors<TState>,
   state?: TState
 ): Found<TState> | undefined

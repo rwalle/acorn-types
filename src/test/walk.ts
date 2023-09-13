@@ -37,7 +37,7 @@ acorn_walk.recursive(program, state, {
 
 acorn_walk.full(program, (node, state, type) => {
   state.x = node.type
-  type === "CallExpression"
+  type === "CallExpression" || type === "ArrayExpression"
 }, undefined, state)
 
 acorn_walk.fullAncestor(program, (node, state, ancestors) => {
