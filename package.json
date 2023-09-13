@@ -17,11 +17,6 @@
     "url": "https://github.com/rwalle/acorn-types/issues"
   },
   "homepage": "https://github.com/rwalle/acorn-types#readme",
-  "dependencies": {
-    "acorn": "^8.10.0",
-    "acorn-loose": "^8.3.0",
-    "acorn-walk": "^8.2.0"
-  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.6.0",
     "@typescript-eslint/parser": "^6.6.0",
