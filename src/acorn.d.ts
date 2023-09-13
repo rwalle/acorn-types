@@ -48,8 +48,9 @@ export interface Program extends Node {
 export interface Function extends Node {
   id?: Identifier | null
   params: Array<Pattern>
-  body: BlockStatement
+  body: BlockStatement | Expression
   generator: boolean
+  expression: boolean
   async: boolean
 }
 
@@ -166,6 +167,7 @@ export interface ForInStatement extends Node {
 export interface FunctionDeclaration extends Function {
   type: "FunctionDeclaration"
   id: Identifier
+  body: BlockStatement
 }
 
 export interface VariableDeclaration extends Node {
@@ -206,6 +208,7 @@ export interface Property extends Node {
 
 export interface FunctionExpression extends Function {
   type: "FunctionExpression"
+  body: BlockStatement
 }
 
 export interface UnaryExpression extends Node {
@@ -303,14 +306,8 @@ export interface SpreadElement extends Node {
   argument: Expression
 }
 
-export interface ArrowFunctionExpression extends Node {
+export interface ArrowFunctionExpression extends Function {
   type: "ArrowFunctionExpression"
-  id?: Identifier | null
-  params: Array<Pattern>
-  body: BlockStatement | Expression
-  async: boolean
-  expression: boolean
-  generator: false
 }
 
 export interface YieldExpression extends Node {
@@ -444,6 +441,7 @@ export interface ExportSpecifier extends Node {
 export interface AnonymousFunctionDeclaration extends Function {
   type: "FunctionDeclaration"
   id: null
+  body: BlockStatement
 }
 
 export interface AnonymousClassDeclaration extends Class {
