@@ -729,20 +729,12 @@ export interface Options {
 }
   
 export class Parser {
-  // state.js
-  lineStart: number
   options: Options
-  curLine: number
-  start: number
-  end: number
   input: string
-  type: TokenType
   
-  // state.js
   constructor(options: Options, input: string, startPos?: number)
   parse(): Program
   
-  // state.js
   static parse(input: string, options: Options): Program
   static parseExpressionAt(input: string, pos: number, options: Options): Expression
   static tokenizer(input: string, options: Options): {
@@ -759,35 +751,9 @@ export function getLineInfo(input: string, offset: number): Position
 export class TokenType {
   label: string
   keyword: string | undefined
-  beforeExpr: boolean
-  startsExpr: boolean
-  isLoop: boolean
-  isAssign: boolean
-  prefix: boolean
-  postfix: boolean
-  binop: number | null
-  updateContext: (prevType: TokenType) => void | null
-  constructor(label: string, conf?: {
-    label?: string,
-    keyword?: string,
-    beforeExpr?: boolean,
-    startsExpr?: boolean,
-    isLoop?: boolean,
-    isAssign?: boolean,
-    prefix?: boolean,
-    postfix?: boolean,
-    binop?: number
-  })
 }
 
-export function isIdentifierStart(code: number, astral?: boolean): boolean
-
-export function isIdentifierChar(code: number, astral?: boolean): boolean
-
-export interface AbstractToken {
-}
-
-export interface Comment extends AbstractToken {
+export interface Comment {
   type: "Line" | "Block"
   value: string
   start: number
@@ -798,21 +764,10 @@ export interface Comment extends AbstractToken {
 
 export class Token {
   type: TokenType
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any
   start: number
   end: number
   loc?: SourceLocation
   range?: [number, number]
-  constructor(p: Parser)
 }
 
-export function isNewLine(code: number): boolean
-
-export const lineBreak: RegExp
-
-export const lineBreakG: RegExp
-
 export const version: string
-
-export const nonASCIIwhitespace: RegExp
