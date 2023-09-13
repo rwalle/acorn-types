@@ -1,12 +1,11 @@
-import * as acornLoose from "acorn-loose";
-import * as acorn from "acorn";
-import * as assert from "assert";
+import * as acornLoose from "acorn-loose"
+import * as acorn from "acorn"
 
-declare var node: acorn.Node;
+declare let node: acorn.Node
 
-console.log(acornLoose.isDummy(node) === false);
+acornLoose.isDummy(node) === false
 
-const program = acornLoose.parse("1 / * 4 )[2]", { ecmaVersion: 2020 });
+const program = acornLoose.parse("1 / * 4 )[2]", {ecmaVersion: 2020})
 
-assert(program.body.length === 2);
-assert(program.body[0].type === "ExpressionStatement");
+program.body.length === 2
+program.body[0].type === "ExpressionStatement"

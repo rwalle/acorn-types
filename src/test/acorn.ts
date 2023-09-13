@@ -1,17 +1,25 @@
-import * as assert from 'assert';
-import * as acorn from 'acorn';
+import * as acorn from "acorn";
 
-const t = acorn.parse('const x = [1,2,3]', { ecmaVersion: 2022 });
-assert(t.type === 'Program');
-assert(t.body.length === 1);
-assert(t.body[0].type === 'VariableDeclaration');
-assert(t.body[0].kind === 'const');
-assert(t.body[0].declarations.length === 1);
-assert(t.body[0].declarations[0].type === 'VariableDeclarator');
-assert(t.body[0].declarations[0].id.type === 'Identifier');
-assert(t.body[0].declarations[0].id.name === 'x');
-assert(t.body[0].declarations[0].init !== undefined && t.body[0].declarations[0].init !== null);
-assert(t.body[0].declarations[0].init.type === 'ArrayExpression');
-assert(t.body[0].declarations[0].init.elements.length === 3);
-assert(t.body[0].declarations[0].init.elements[0] !== null);
-assert(t.body[0].declarations[0].init.elements[0].type === 'Literal');
+const t = acorn.parse("const x = [1,2,3]", {ecmaVersion: 2022});
+t.type === "Program"
+t.body.length === 1
+const node = t.body[0]
+if (node.type === "VariableDeclaration") {
+  node.kind === "const"
+  node.declarations.length === 1
+  const declaration = node.declarations[0];
+  declaration.type === "VariableDeclarator"
+  const id = declaration.id
+  if (id.type === "Identifier") {
+    id.name === "x"
+    const init = declaration.init
+    if (init !== undefined && init !== null && init.type === "ArrayExpression") {
+      const array = init
+      const elements = array.elements
+      elements.length === 3
+      if (elements[0] !== null) {
+        elements[0].type === "Literal"
+      }
+    }
+  }
+}
