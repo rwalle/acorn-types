@@ -32,6 +32,7 @@ export interface Identifier extends Node {
 export interface Literal extends Node {
   type: "Literal"
   value?: string | boolean | null | number | RegExp | bigint
+  raw?: string
   regex?: {
     pattern: string
     flags: string
