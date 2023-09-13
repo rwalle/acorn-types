@@ -477,6 +477,11 @@ export interface ImportExpression extends Node {
   source: Expression
 }
 
+export interface ParenthesizedExpression extends Node {
+  type: "ParenthesizedExpression"
+  expression: Expression
+}
+
 export interface PropertyDefinition extends Node {
   type: "PropertyDefinition"
   key: Expression | PrivateIdentifier
@@ -513,6 +518,7 @@ export type Statement =
 | DoWhileStatement
 | ForStatement
 | ForInStatement
+| ForOfStatement
 | Declaration
 
 export type Declaration = 
@@ -546,6 +552,7 @@ export type Expression =
 | AwaitExpression
 | ChainExpression
 | ImportExpression
+| ParenthesizedExpression
 
 export type Pattern = 
 | Identifier
