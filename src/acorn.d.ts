@@ -737,20 +737,12 @@ export interface Options {
 }
   
 export class Parser {
-  // state.js
-  lineStart: number
   options: Options
-  curLine: number
-  start: number
-  end: number
   input: string
-  type: TokenType
   
-  // state.js
   constructor(options: Options, input: string, startPos?: number)
   parse(): Program
   
-  // state.js
   static parse(input: string, options: Options): Program
   static parseExpressionAt(input: string, pos: number, options: Options): Expression
   static tokenizer(input: string, options: Options): {
@@ -767,35 +759,92 @@ export function getLineInfo(input: string, offset: number): Position
 export class TokenType {
   label: string
   keyword: string | undefined
-  beforeExpr: boolean
-  startsExpr: boolean
-  isLoop: boolean
-  isAssign: boolean
-  prefix: boolean
-  postfix: boolean
-  binop: number | null
-  updateContext: (prevType: TokenType) => void | null
-  constructor(label: string, conf?: {
-    label?: string,
-    keyword?: string,
-    beforeExpr?: boolean,
-    startsExpr?: boolean,
-    isLoop?: boolean,
-    isAssign?: boolean,
-    prefix?: boolean,
-    postfix?: boolean,
-    binop?: number
-  })
 }
 
-export function isIdentifierStart(code: number, astral?: boolean): boolean
+export const tokTypes: {
+  num: TokenType
+  regexp: TokenType
+  string: TokenType
+  name: TokenType
+  privateId: TokenType
+  eof: TokenType
 
-export function isIdentifierChar(code: number, astral?: boolean): boolean
+  bracketL: TokenType
+  bracketR: TokenType
+  braceL: TokenType
+  braceR: TokenType
+  parenL: TokenType
+  parenR: TokenType
+  comma: TokenType
+  semi: TokenType
+  colon: TokenType
+  dot: TokenType
+  question: TokenType
+  questionDot: TokenType
+  arrow: TokenType
+  template: TokenType
+  invalidTemplate: TokenType
+  ellipsis: TokenType
+  backQuote: TokenType
+  dollarBraceL: TokenType
 
-export interface AbstractToken {
+  eq: TokenType
+  assign: TokenType
+  incDec: TokenType
+  prefix: TokenType
+  logicalOR: TokenType
+  logicalAND: TokenType
+  bitwiseOR: TokenType
+  bitwiseXOR: TokenType
+  bitwiseAND: TokenType
+  equality: TokenType
+  relational: TokenType
+  bitShift: TokenType
+  plusMin: TokenType
+  modulo: TokenType
+  star: TokenType
+  slash: TokenType
+  starstar: TokenType
+  coalesce: TokenType
+
+  _break: TokenType
+  _case: TokenType
+  _catch: TokenType
+  _continue: TokenType
+  _debugger: TokenType
+  _default: TokenType
+  _do: TokenType
+  _else: TokenType
+  _finally: TokenType
+  _for: TokenType
+  _function: TokenType
+  _if: TokenType
+  _return: TokenType
+  _switch: TokenType
+  _throw: TokenType
+  _try: TokenType
+  _var: TokenType
+  _const: TokenType
+  _while: TokenType
+  _with: TokenType
+  _new: TokenType
+  _this: TokenType
+  _super: TokenType
+  _class: TokenType
+  _extends: TokenType
+  _export: TokenType
+  _import: TokenType
+  _null: TokenType
+  _true: TokenType
+  _false: TokenType
+  _in: TokenType
+  _instanceof: TokenType
+  _typeof: TokenType
+  _void: TokenType
+  _delete: TokenType
 }
 
-export interface Comment extends AbstractToken {
+export interface Comment {
   type: "Line" | "Block"
   value: string
   start: number
@@ -806,21 +855,10 @@ export interface Comment extends AbstractToken {
 
 export class Token {
   type: TokenType
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any
   start: number
   end: number
   loc?: SourceLocation
   range?: [number, number]
-  constructor(p: Parser)
 }
 
-export function isNewLine(code: number): boolean
-
-export const lineBreak: RegExp
-
-export const lineBreakG: RegExp
-
 export const version: string
-
-export const nonASCIIwhitespace: RegExp
